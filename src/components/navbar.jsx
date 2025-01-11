@@ -1,22 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import useDropdown from "../hooks/useDropDown";
 import TrigDarkmode from "./TrigDarkmode";
 
-const Navbar = () => {
+const Navbar = ({ isDarkmode, SetIsDarkmode}) => {
   const username = localStorage.getItem("username");
-  const [isDarkmode, SetIsDarkmode] = useState("system");
   const { dropdownOpen, setDropdownOpen, trigger, dropdown } = useDropdown();
   const { dropdownOpen: dropdownTwoOpen, setDropdownOpen: setDropdownTwoOpen, trigger: triggerTwo, dropdown: dropdownTwo,} = useDropdown();
-
-  useEffect(() => {
-    const root = window.document.documentElement;
-    if (isDarkmode === "dark" || (isDarkmode === "system" && window.matchMedia("(prefers-color-scheme: dark)").matches)) {
-      root.classList.add("dark");
-    } else {
-      root.classList.remove("dark");
-    }
-  }, [isDarkmode]);
-
 
   const handleLogout = () => {
     localStorage.setItem("isAuthenticated", false);

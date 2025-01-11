@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import Navbar from "../components/navbar";
 
 const EditProfile = () => {
   const [form, setForm] = useState({
@@ -24,8 +23,7 @@ const EditProfile = () => {
 
   return (
     <div>
-      <Navbar />
-      <section className="overflow-hidden pt-12 pb-6 px-4 bg-white dark:bg-dark">
+      <section className="overflow-hidden pt-12 pb-6 px-4 bg-white dark:bg-slate-800 dark:text-white min-h-screen">
         <div className="container mx-auto">
           <div className="flex flex-wrap items-center justify-between -mx-4">
             <div className="w-full px-4 ">

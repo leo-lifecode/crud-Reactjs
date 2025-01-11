@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from "react";
-import Navbar from "../components/navbar";
 import Pagination from "../components/pagination";
 import { useNavigate, useSearchParams } from "react-router-dom";
 
-const Home = ({ tasks, setTasks, setIdEdit }) => {
+const Home = ({ tasks, setTasks }) => {
   const [title, setTitle] = useState("");
   const [category, setCategory] = useState("");
   const [description, setDescription] = useState("");
@@ -13,7 +12,7 @@ const Home = ({ tasks, setTasks, setIdEdit }) => {
   const [currentPage, setCurrentPage] = useState(
     parseInt(searchParams.get("page")) || 1
   );
-  
+
   const tasksPerPage = 5;
 
   const indexOfLastTask = currentPage * tasksPerPage;
@@ -63,11 +62,15 @@ const Home = ({ tasks, setTasks, setIdEdit }) => {
     setCategory("");
     setDescription("");
   };
+  
+  const handleView = (e, id) => {
+   e.preventDefault();
+   navigate("/ViewTask?id=" + id); 
+  }
 
   const handleEdit = (e, id) => {
     e.preventDefault();
-    setIdEdit(id);
-    navigate("/EditTask");
+    navigate("/EditTask?id=" + id);
   };
   const handleDelete = (id) => {
     const updatedTasks = tasks.filter((task) => task.id !== id);
@@ -76,28 +79,29 @@ const Home = ({ tasks, setTasks, setIdEdit }) => {
 
   return (
     <div className="bg-white min-h-screen font-roboto dark:bg-slate-800 dark:text-white">
-      <Navbar />
       <div className="p-4">
-        <div className="form-portion sm:w-[80%] w-[90%] mx-auto">
+        <div className="sm:w-[80%] w-[90%] mx-auto">
           <form className="p-5 mt-5 ">
             <div className="flex md:flex-row flex-col justify-evenly">
-              <label htmlFor="title" className="text-xl md:mb-0 mb-1">
+              <div className="text-xl md:mb-0 mb-1">
                 Title
-              </label>
+              </div>
               <input
                 type="text"
                 name="title"
+                id="title"
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
                 placeholder="Enter your full name"
                 className="md:w-[35%] w-1/1 px-4 py-2 md:mb-0 mb-3 border border-black rounded-xl text-black"
               />
-              <label htmlFor="category" className="text-xl md:mb-0 mb-1">
+              <div className="text-xl md:mb-0 mb-1">
                 Category
-              </label>
+              </div>
               <input
                 type="text"
                 name="category"
+                id="category"
                 value={category}
                 onChange={(e) => setCategory(e.target.value)}
                 placeholder="Enter your category"
@@ -106,13 +110,14 @@ const Home = ({ tasks, setTasks, setIdEdit }) => {
             </div>
             <div className="md:p-5 p-1 sm:mt-1 mt-1">
               <div className="md:mt-1 mt-2">
-                <label htmlFor="description" className="text-xl">
+                <div className="text-xl">
                   Description
-                </label>
+                </div>
                 <br />
                 <input
                   type="text"
                   name="description"
+                  id="description"
                   value={description}
                   onChange={(e) => setDescription(e.target.value)}
                   placeholder="Mention your area of concern"
@@ -140,6 +145,7 @@ const Home = ({ tasks, setTasks, setIdEdit }) => {
               }}
               value={searchQuery}
               type="text"
+              name="searching"
               placeholder="Search name here..."
               className="p-2 outline-none text-black"
             />
@@ -169,6 +175,12 @@ const Home = ({ tasks, setTasks, setIdEdit }) => {
                   <td className="p-2">{item.category}</td>
                   <td className="p-2">{item.description}</td>
                   <td className="p-2 space-x-3 flex">
+                    <button
+                      onClick={(e) => handleView(e, item.id)}
+                      className="rounded-xl font-medium text-sm shadow-md px-2 py-1 bg-green-600"
+                    >
+                      View
+                    </button>
                     <button
                       onClick={(e) => handleEdit(e, item.id)}
                       className="rounded-xl font-medium text-sm shadow-md px-2 py-1 bg-yellow-300"

@@ -6,6 +6,8 @@ import PrivateRoute from "./components/privateRoute";
 import EditProfile from "./pages/EditProfile";
 import { useEffect, useState } from "react";
 import EditTask from "./pages/EditTask";
+import ViewTask from "./pages/ViewTask";
+import Navbar from "./components/navbar";
 
 function App() {
   const getTaskLocal = JSON.parse(localStorage.getItem("tasks")) || [
@@ -17,21 +19,34 @@ function App() {
     },
   ];
 
+  const getDarkMode = localStorage.getItem("darkMode") || "system";
+  const [isDarkmode, SetIsDarkmode] = useState(getDarkMode);
   const [tasks, setTasks] = useState(getTaskLocal);
-  const [idEdit , setIdEdit] = useState(null);
   
   useEffect(() => {
     localStorage.setItem("tasks", JSON.stringify(tasks));
   }, [tasks]);  
 
+  useEffect(() => {
+    localStorage.setItem("darkMode", isDarkmode);
+    if (isDarkmode === "dark" || (isDarkmode === "system" && window.matchMedia("(prefers-color-scheme: dark)").matches)) {
+      document.body.classList.add("dark");
+    } else {
+      document.body.classList.remove("dark");
+    }
+  }, [isDarkmode]);
+
+
   return (
     <Router>
+      <Navbar isDarkmode={isDarkmode} SetIsDarkmode={SetIsDarkmode} />
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route element={<PrivateRoute />}>
-          <Route path="/" element={<Home  tasks={tasks} setTasks={setTasks} setIdEdit={setIdEdit} /> } />
-          <Route path="/EditProfile" element={<EditProfile />} />
-          <Route path="/EditTask" element={<EditTask tasks={tasks} setTasks={setTasks} idEdit={idEdit} setIdEdit={setIdEdit} />} />
+          <Route path="/" element={<Home tasks={tasks} setTasks={setTasks}  /> } />
+          <Route path="/EditProfile" element={<EditProfile  />} />
+          <Route path="/EditTask" element={<EditTask tasks={tasks} setTasks={setTasks}  />} />
+          <Route path="/ViewTask" element={<ViewTask tasks={tasks} />} />
         </Route>
       </Routes>
     </Router>
