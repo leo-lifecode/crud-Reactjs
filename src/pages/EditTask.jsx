@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
+import Navbar from "../components/navbar";
 
-const EditTask = ({ tasks, setTasks }) => {
+const EditTask = ({ tasks, setTasks, isDarkmode, SetIsDarkmode}) => {
   const [searchParams, setSearchParams] = useSearchParams();
   const task = tasks.find((task) => task.id ===  parseInt(searchParams.get("id")));
   const [title, setTitle] = useState("");
@@ -34,6 +35,7 @@ const EditTask = ({ tasks, setTasks }) => {
 
   return (
     <div className="bg-white dark:bg-slate-800 dark:text-white min-h-screen">
+      <Navbar isDarkmode={isDarkmode} SetIsDarkmode={SetIsDarkmode} />
       <h1 className="text-3xl font-bold text-center py-4">Edit Data</h1>
       <div className=" sm:w-[80%] w-[90%] mx-auto">
         <form className="p-5 mt-5" onSubmit={(e) => handleEdit(e)}>

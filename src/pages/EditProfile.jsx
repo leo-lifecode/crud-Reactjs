@@ -1,6 +1,7 @@
 import React, { useState } from "react";
+import Navbar from "../components/navbar";
 
-const EditProfile = () => {
+const EditProfile = ({ isDarkmode, SetIsDarkmode }) => {
   const [form, setForm] = useState({
       username: localStorage.getItem('username'),
     });
@@ -23,6 +24,7 @@ const EditProfile = () => {
 
   return (
     <div>
+      <Navbar isDarkmode={isDarkmode} SetIsDarkmode={SetIsDarkmode} />
       <section className="overflow-hidden pt-12 pb-6 px-4 bg-white dark:bg-slate-800 dark:text-white min-h-screen">
         <div className="container mx-auto">
           <div className="flex flex-wrap items-center justify-between -mx-4">

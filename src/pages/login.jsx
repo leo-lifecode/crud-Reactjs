@@ -8,6 +8,10 @@ const Login = () => {
 
   const handleLogin = (e) => {
     e.preventDefault();
+    if (!form.username || !form.password) {
+      alert("fields are required!");
+      return;
+    }
     localStorage.setItem("username", form.username);
     localStorage.setItem("password", form.password);
     localStorage.setItem("isAuthenticated", true);

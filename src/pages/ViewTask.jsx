@@ -1,11 +1,13 @@
 import { useSearchParams } from "react-router-dom";
+import Navbar from "../components/navbar";
 
-const ViewTask = ({ tasks}) => {
+const ViewTask = ({ tasks , isDarkmode, SetIsDarkmode}) => {
   const [searchParams, setSearchParams] = useSearchParams();
   const task = tasks.find((task) => task.id ===  parseInt(searchParams.get("id")));
 
   return (
     <div className="bg-gray-100 dark:bg-slate-800 dark:text-white min-h-screen">
+      <Navbar isDarkmode={isDarkmode} SetIsDarkmode={SetIsDarkmode} />
       <div className="container mx-auto px-4 py-8">
         <h1 className="text-4xl font-bold text-center text-gray-800 dark:text-white mb-8">View Task</h1>
         <div className="bg-white shadow-lg rounded-lg p-8">

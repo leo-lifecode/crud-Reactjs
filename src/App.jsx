@@ -39,14 +39,13 @@ function App() {
 
   return (
     <Router>
-      <Navbar isDarkmode={isDarkmode} SetIsDarkmode={SetIsDarkmode} />
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route element={<PrivateRoute />}>
-          <Route path="/" element={<Home tasks={tasks} setTasks={setTasks}  /> } />
-          <Route path="/EditProfile" element={<EditProfile  />} />
-          <Route path="/EditTask" element={<EditTask tasks={tasks} setTasks={setTasks}  />} />
-          <Route path="/ViewTask" element={<ViewTask tasks={tasks} />} />
+          <Route path="/" element={<Home tasks={tasks} setTasks={setTasks} isDarkmode={isDarkmode} SetIsDarkmode={SetIsDarkmode}  /> } />
+          <Route path="/EditProfile" element={<EditProfile  isDarkmode={isDarkmode} SetIsDarkmode={SetIsDarkmode} />} />
+          <Route path="/EditTask" element={<EditTask tasks={tasks} setTasks={setTasks} isDarkmode={isDarkmode} SetIsDarkmode={SetIsDarkmode}  />} />
+          <Route path="/ViewTask" element={<ViewTask tasks={tasks} isDarkmode={isDarkmode} SetIsDarkmode={SetIsDarkmode} />} />
         </Route>
       </Routes>
     </Router>

@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import Pagination from "../components/pagination";
 import { useNavigate, useSearchParams } from "react-router-dom";
+import Navbar from "../components/navbar";
 
-const Home = ({ tasks, setTasks }) => {
+const Home = ({ tasks, setTasks, isDarkmode, SetIsDarkmode }) => {
   const [title, setTitle] = useState("");
   const [category, setCategory] = useState("");
   const [description, setDescription] = useState("");
@@ -79,6 +80,7 @@ const Home = ({ tasks, setTasks }) => {
 
   return (
     <div className="bg-white min-h-screen font-roboto dark:bg-slate-800 dark:text-white">
+      <Navbar isDarkmode={isDarkmode} SetIsDarkmode={SetIsDarkmode} />
       <div className="p-4">
         <div className="sm:w-[80%] w-[90%] mx-auto">
           <form className="p-5 mt-5 ">
