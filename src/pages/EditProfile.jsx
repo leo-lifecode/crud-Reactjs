@@ -4,7 +4,6 @@ import Navbar from "../components/navbar";
 const EditProfile = () => {
   const [form, setForm] = useState({
       username: localStorage.getItem('username'),
-      password: "",
     });
 
   const handleChange = (e) => {
@@ -41,14 +40,7 @@ const EditProfile = () => {
                                 Username
                                 </label>
                                 <div class="relative">
-                                <input
-                                    name="username"
-                                    type="text"
-                                    value={form.username}
-                                    onChange={handleChange}
-                                    placeholder="Your Username"
-                                    class="w-full bg-transparent rounded-md border border-stroke dark:border-dark-3 py-[10px] pr-3 pl-12 text-dark-6 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2"
-                                />
+                                <input name="username" type="text" value={form.username} onChange={handleChange} placeholder="Your Username" class="w-full bg-transparent rounded-md border border-stroke dark:border-dark-3 py-[10px] pr-3 pl-12 text-dark-6 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2" />
                                 <span class="absolute top-1/2 left-4 -translate-y-1/2">
                                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <g opacity="0.8">
