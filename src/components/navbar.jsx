@@ -1,5 +1,5 @@
 import React from "react";
-import useDropdown from "../hooks/useDropDown";
+import useDropdown from "../../src/hooks/useDropdown";
 import TrigDarkmode from "./TrigDarkmode";
 
 const Navbar = ({ isDarkmode, SetIsDarkmode}) => {
